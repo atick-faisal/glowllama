@@ -42,7 +42,9 @@ jobs:
       CGO_LDFLAGS: '-mmacosx-version-min=14.0 -O3'
     steps:
       - uses: actions/checkout@v4
-      - run: |
+      - name: Setup code signing (optional)
+        if: ${{ env.MACOS_SIGNING_KEY != '' }}
+        run: |
           echo $MACOS_SIGNING_KEY | base64 --decode > certificate.p12
           security create-keychain -p password build.keychain
           security default-keychain -s build.keychain
