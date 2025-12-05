@@ -170,30 +170,30 @@ def quicksort(items):
 
 ### 1. Repo Setup and Branding
 
-[ ] Fork Ollama repo
-[ ] Rename binary from `ollama` to `glowllama`
-[ ] Update all go module paths
-[ ] Global search and replace all branding strings
-[ ] Update README, docs, examples
+[x] Fork Ollama repo
+[x] Rename binary from `ollama` to `glowllama`
+[x] Update all go module paths
+[x] Global search and replace all branding strings
+[x] Update README, docs, examples
 [ ] Update GitHub metadata (repo name, description, topics)
 
 ### 2. Code Architecture
 
-[ ] Create OutputRenderer interface
-[ ] Implement GlamourRenderer
-[ ] Implement RawRenderer
-[ ] Add renderer selection logic
-[ ] Refactor CLI output to central rendering pipeline
-[ ] Add flags: `--raw`, `--renderer=`, `--no-style`
+[x] Create OutputRenderer interface
+[x] Implement GlamourRenderer
+[x] Implement RawRenderer
+[x] Add renderer selection logic
+[ ] Refactor CLI output to central rendering pipeline (IN PROGRESS)
+[x] Add flags: `--raw`, `--renderer=`, `--no-style`
 [ ] Implement config loader for renderer settings
-[ ] Add auto-detection for ANSI support
+[x] Add auto-detection for ANSI support
 
 ### 3. Markdown Rendering Integration
 
-[ ] Add Glamour dependency
-[ ] Add default style presets
-[ ] Implement safe fallback for rendering errors
-[ ] Handle buffered output for streaming mode
+[x] Add Glamour dependency
+[x] Add default style presets
+[x] Implement safe fallback for rendering errors
+[ ] Handle buffered output for streaming mode (IN PROGRESS)
 [ ] Add unit tests for renderer behavior
 [ ] Add snapshot tests for formatting
 

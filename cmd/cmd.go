@@ -513,6 +513,12 @@ func RunHandler(cmd *cobra.Command, args []string) error {
 
 	opts.ParentModel = info.Details.ParentModel
 
+	// Initialize renderer for output
+	if err := initRenderer(opts); err != nil {
+		// Log warning but continue with raw renderer
+		fmt.Fprintf(os.Stderr, "warning: failed to initialize renderer, using raw output: %v\n", err)
+	}
+
 	// Check if this is an embedding model
 	isEmbeddingModel := slices.Contains(info.Capabilities, model.CapabilityEmbedding)
 
@@ -1360,6 +1366,8 @@ func chat(cmd *cobra.Command, opts runOptions) (*api.Message, error) {
 	var thinkTagClosed bool = false
 
 	role := "assistant"
+	shouldBuffer := globalRenderer != nil && globalRenderer.ShouldRender()
+	var bufferedContent strings.Builder
 
 	fn := func(response api.ChatResponse) error {
 		if response.Message.Content != "" || !opts.HideThinking {
@@ -1402,7 +1410,11 @@ func chat(cmd *cobra.Command, opts runOptions) (*api.Message, error) {
 			}
 		}
 
-		displayResponse(content, opts.WordWrap, state)
+		if shouldBuffer {
+			bufferedContent.WriteString(content)
+		} else {
+			displayResponse(content, opts.WordWrap, state)
+		}
 
 		return nil
 	}
@@ -1436,6 +1448,12 @@ func chat(cmd *cobra.Command, opts runOptions) (*api.Message, error) {
 			return nil, nil
 		}
 		return nil, err
+	}
+
+	// Render buffered content if applicable
+	if shouldBuffer && bufferedContent.Len() > 0 {
+		rendered := renderOutput(bufferedContent.String())
+		fmt.Print(rendered)
 	}
 
 	if len(opts.Messages) > 0 {
@@ -1489,8 +1507,10 @@ func generate(cmd *cobra.Command, opts runOptions) error {
 	var thinkingContent strings.Builder
 	var thinkTagOpened bool = false
 	var thinkTagClosed bool = false
+	var fullContent strings.Builder
 
 	plainText := !term.IsTerminal(int(os.Stdout.Fd()))
+	shouldBuffer := globalRenderer != nil && globalRenderer.ShouldRender()
 
 	fn := func(response api.GenerateResponse) error {
 		latest = response
@@ -1520,7 +1540,13 @@ func generate(cmd *cobra.Command, opts runOptions) error {
 			state = &displayResponseState{}
 		}
 
-		displayResponse(content, opts.WordWrap, state)
+		if shouldBuffer {
+			// Buffer content for rendering at the end
+			fullContent.WriteString(content)
+		} else {
+			// Stream directly
+			displayResponse(content, opts.WordWrap, state)
+		}
 
 		if response.ToolCalls != nil {
 			toolCalls := response.ToolCalls
@@ -1560,6 +1586,12 @@ func generate(cmd *cobra.Command, opts runOptions) error {
 			return nil
 		}
 		return err
+	}
+
+	// Render buffered content if applicable
+	if shouldBuffer && fullContent.Len() > 0 {
+		rendered := renderOutput(fullContent.String())
+		fmt.Print(rendered)
 	}
 
 	if opts.Prompt != "" {
