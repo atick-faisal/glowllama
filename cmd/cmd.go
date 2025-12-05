@@ -448,6 +448,25 @@ func RunHandler(cmd *cobra.Command, args []string) error {
 	}
 	opts.WordWrap = !nowrap
 
+	// Renderer options
+	rawOutput, err := cmd.Flags().GetBool("raw")
+	if err != nil {
+		return err
+	}
+	opts.RawOutput = rawOutput
+
+	rendererStyle, err := cmd.Flags().GetString("renderer")
+	if err != nil {
+		return err
+	}
+	opts.RendererStyle = rendererStyle
+
+	noStyle, err := cmd.Flags().GetBool("no-style")
+	if err != nil {
+		return err
+	}
+	opts.NoStyle = noStyle
+
 	// Fill out the rest of the options based on information about the
 	// model.
 	client, err := api.ClientFromEnvironment()
@@ -1186,6 +1205,9 @@ type runOptions struct {
 	Think        *api.ThinkValue
 	HideThinking bool
 	ShowConnect  bool
+	RawOutput    bool
+	RendererStyle string
+	NoStyle      bool
 }
 
 func (r runOptions) Copy() runOptions {
@@ -1688,8 +1710,8 @@ func NewCLI() *cobra.Command {
 	}
 
 	rootCmd := &cobra.Command{
-		Use:           "ollama",
-		Short:         "Large language model runner",
+		Use:           "glowllama",
+		Short:         "Large language model runner with beautiful terminal output",
 		SilenceUsage:  true,
 		SilenceErrors: true,
 		CompletionOptions: cobra.CompletionOptions{
@@ -1751,6 +1773,11 @@ func NewCLI() *cobra.Command {
 	runCmd.Flags().Bool("hidethinking", false, "Hide thinking output (if provided)")
 	runCmd.Flags().Bool("truncate", false, "For embedding models: truncate inputs exceeding context length (default: true). Set --truncate=false to error instead")
 	runCmd.Flags().Int("dimensions", 0, "Truncate output embeddings to specified dimension (embedding models only)")
+	
+	// Renderer flags for Glowllama
+	runCmd.Flags().Bool("raw", false, "Disable Markdown rendering (raw output)")
+	runCmd.Flags().String("renderer", "auto", "Markdown renderer style (dark, light, auto)")
+	runCmd.Flags().Bool("no-style", false, "Disable styling but keep formatting")
 
 	stopCmd := &cobra.Command{
 		Use:     "stop MODEL",
@@ -1763,7 +1790,7 @@ func NewCLI() *cobra.Command {
 	serveCmd := &cobra.Command{
 		Use:     "serve",
 		Aliases: []string{"start"},
-		Short:   "Start ollama",
+		Short:   "Start glowllama",
 		Args:    cobra.ExactArgs(0),
 		RunE:    RunServer,
 	}
@@ -1790,7 +1817,7 @@ func NewCLI() *cobra.Command {
 
 	signinCmd := &cobra.Command{
 		Use:     "signin",
-		Short:   "Sign in to ollama.com",
+		Short:   "Sign in to ollama.com (cloud models)",
 		Args:    cobra.ExactArgs(0),
 		PreRunE: checkServerHeartbeat,
 		RunE:    SigninHandler,
