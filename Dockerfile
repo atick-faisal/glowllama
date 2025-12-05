@@ -99,7 +99,7 @@ RUN --mount=type=cache,target=/root/.ccache \
     cmake --preset 'ROCm 6' \
         && cmake --build --parallel ${PARALLEL} --preset 'ROCm 6' \
         && cmake --install build --component HIP --strip --parallel ${PARALLEL}
-RUN rm -f dist/lib/ollama/rocm/rocblas/library/*gfx90[06]*
+RUN rm -f dist/lib/glowllama/rocm/rocblas/library/*gfx90[06]*
 
 FROM --platform=linux/arm64 nvcr.io/nvidia/l4t-jetpack:${JETPACK5VERSION} AS jetpack-5
 ARG CMAKEVERSION
@@ -135,7 +135,7 @@ RUN --mount=type=cache,target=/root/.ccache \
 
 
 FROM base AS build
-WORKDIR /go/src/github.com/ollama/ollama
+WORKDIR /go/src/github.com/glowllama/glowllama
 COPY go.mod go.sum .
 RUN curl -fsSL https://golang.org/dl/go$(awk '/^go/ { print $2 }' go.mod).linux-$(case $(uname -m) in x86_64) echo amd64 ;; aarch64) echo arm64 ;; esac).tar.gz | tar xz -C /usr/local
 ENV PATH=/usr/local/go/bin:$PATH
@@ -146,28 +146,28 @@ ENV CGO_ENABLED=1
 ARG CGO_CFLAGS
 ARG CGO_CXXFLAGS
 RUN --mount=type=cache,target=/root/.cache/go-build \
-    go build -trimpath -buildmode=pie -o /bin/ollama .
+    go build -trimpath -buildmode=pie -o /bin/glowllama .
 
 FROM --platform=linux/amd64 scratch AS amd64
-# COPY --from=cuda-11 dist/lib/ollama/ /lib/ollama/
-COPY --from=cuda-12 dist/lib/ollama /lib/ollama/
-COPY --from=cuda-13 dist/lib/ollama /lib/ollama/
-COPY --from=vulkan  dist/lib/ollama  /lib/ollama/
+# COPY --from=cuda-11 dist/lib/glowllama/ /lib/glowllama/
+COPY --from=cuda-12 dist/lib/glowllama /lib/glowllama/
+COPY --from=cuda-13 dist/lib/glowllama /lib/glowllama/
+COPY --from=vulkan  dist/lib/glowllama  /lib/glowllama/
 
 FROM --platform=linux/arm64 scratch AS arm64
-# COPY --from=cuda-11 dist/lib/ollama/ /lib/ollama/
-COPY --from=cuda-12 dist/lib/ollama /lib/ollama/
-COPY --from=cuda-13 dist/lib/ollama/ /lib/ollama/
-COPY --from=jetpack-5 dist/lib/ollama/ /lib/ollama/
-COPY --from=jetpack-6 dist/lib/ollama/ /lib/ollama/
+# COPY --from=cuda-11 dist/lib/glowllama/ /lib/glowllama/
+COPY --from=cuda-12 dist/lib/glowllama /lib/glowllama/
+COPY --from=cuda-13 dist/lib/glowllama/ /lib/glowllama/
+COPY --from=jetpack-5 dist/lib/glowllama/ /lib/glowllama/
+COPY --from=jetpack-6 dist/lib/glowllama/ /lib/glowllama/
 
 FROM scratch AS rocm
-COPY --from=rocm-6 dist/lib/ollama /lib/ollama
+COPY --from=rocm-6 dist/lib/glowllama /lib/glowllama
 
 FROM ${FLAVOR} AS archive
 ARG VULKANVERSION
-COPY --from=cpu dist/lib/ollama /lib/ollama
-COPY --from=build /bin/ollama /bin/ollama
+COPY --from=cpu dist/lib/glowllama /lib/glowllama
+COPY --from=build /bin/glowllama /bin/glowllama
 
 FROM ubuntu:24.04
 RUN apt-get update \
@@ -176,11 +176,11 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 COPY --from=archive /bin /usr/bin
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-COPY --from=archive /lib/ollama /usr/lib/ollama
+COPY --from=archive /lib/glowllama /usr/lib/glowllama
 ENV LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
 ENV NVIDIA_VISIBLE_DEVICES=all
-ENV OLLAMA_HOST=0.0.0.0:11434
+ENV GLOWLLAMA_HOST=0.0.0.0:11434
 EXPOSE 11434
-ENTRYPOINT ["/bin/ollama"]
+ENTRYPOINT ["/bin/glowllama"]
 CMD ["serve"]
