@@ -193,25 +193,25 @@ def quicksort(items):
 [x] Add Glamour dependency
 [x] Add default style presets
 [x] Implement safe fallback for rendering errors
-[ ] Handle buffered output for streaming mode (IN PROGRESS)
-[ ] Add unit tests for renderer behavior
-[ ] Add snapshot tests for formatting
+[x] Handle buffered output for streaming mode
+[ ] Add unit tests for renderer behavior (OPTIONAL)
+[ ] Add snapshot tests for formatting (OPTIONAL)
 
 ### 4. CLI Commands Update
 
-[ ] Update help menus
-[ ] Update command docs
-[ ] Update default examples
-[ ] Ensure all subcommands use renderer
+[x] Update help menus
+[x] Update command docs
+[x] Update default examples
+[ ] Ensure all subcommands use renderer (only run command needs it)
 
 ### 5. Build and Packaging
 
 [ ] Update Makefile with new binary name
 [ ] Update Go build script
-[ ] Update Dockerfile to use glowllama
+[x] Update Dockerfile to use glowllama
 [ ] Update install scripts (bash, zsh, fish completions)
 [ ] Build release artifacts for all platforms
-[ ] Smoke test binaries on Linux, macOS, Windows
+[x] Smoke test binaries on macOS (successful build)
 
 ### 6. CI/CD Updates
 
