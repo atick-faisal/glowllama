@@ -4,7 +4,7 @@ import (
 	"math"
 	"sort"
 
-	"github.com/ollama/ollama/llm"
+	"github.com/glowllama/glowllama/llm"
 )
 
 // TokenDecoderFunc is a function that converts token IDs to text.

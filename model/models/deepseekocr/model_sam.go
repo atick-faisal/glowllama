@@ -4,8 +4,8 @@ import (
 	"math"
 	"slices"
 
-	"github.com/ollama/ollama/ml"
-	"github.com/ollama/ollama/ml/nn"
+	"github.com/glowllama/glowllama/ml"
+	"github.com/glowllama/glowllama/ml/nn"
 )
 
 type samModel struct {

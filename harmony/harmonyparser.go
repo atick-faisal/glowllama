@@ -7,8 +7,8 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/ollama/ollama/api"
-	"github.com/ollama/ollama/logutil"
+	"github.com/glowllama/glowllama/api"
+	"github.com/glowllama/glowllama/logutil"
 )
 
 type harmonyParserState int

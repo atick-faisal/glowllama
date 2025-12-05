@@ -11,7 +11,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ollama/ollama/app/ui/responses"
+	"github.com/glowllama/glowllama/app/ui/responses"
 )
 
 type PageType string

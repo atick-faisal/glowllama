@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"strings"
 
-	"github.com/ollama/ollama/api"
+	"github.com/glowllama/glowllama/api"
 )
 
 type CogitoRenderer struct {

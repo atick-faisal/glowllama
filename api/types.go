@@ -13,8 +13,8 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/ollama/ollama/envconfig"
-	"github.com/ollama/ollama/types/model"
+	"github.com/glowllama/glowllama/envconfig"
+	"github.com/glowllama/glowllama/types/model"
 )
 
 // StatusError is an error with an HTTP status code and message.

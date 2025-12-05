@@ -22,14 +22,14 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/ollama/ollama/app/auth"
-	"github.com/ollama/ollama/app/logrotate"
-	"github.com/ollama/ollama/app/server"
-	"github.com/ollama/ollama/app/store"
-	"github.com/ollama/ollama/app/tools"
-	"github.com/ollama/ollama/app/ui"
-	"github.com/ollama/ollama/app/updater"
-	"github.com/ollama/ollama/app/version"
+	"github.com/glowllama/glowllama/app/auth"
+	"github.com/glowllama/glowllama/app/logrotate"
+	"github.com/glowllama/glowllama/app/server"
+	"github.com/glowllama/glowllama/app/store"
+	"github.com/glowllama/glowllama/app/tools"
+	"github.com/glowllama/glowllama/app/ui"
+	"github.com/glowllama/glowllama/app/updater"
+	"github.com/glowllama/glowllama/app/version"
 )
 
 var (

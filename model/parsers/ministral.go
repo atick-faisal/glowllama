@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ollama/ollama/api"
+	"github.com/glowllama/glowllama/api"
 )
 
 type ministralParserState int

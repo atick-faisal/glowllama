@@ -3,11 +3,11 @@ package deepseekocr
 import (
 	"math"
 
-	"github.com/ollama/ollama/kvcache"
-	"github.com/ollama/ollama/ml"
-	"github.com/ollama/ollama/ml/nn"
-	"github.com/ollama/ollama/ml/nn/fast"
-	"github.com/ollama/ollama/ml/nn/rope"
+	"github.com/glowllama/glowllama/kvcache"
+	"github.com/glowllama/glowllama/ml"
+	"github.com/glowllama/glowllama/ml/nn"
+	"github.com/glowllama/glowllama/ml/nn/fast"
+	"github.com/glowllama/glowllama/ml/nn/rope"
 )
 
 type textModel struct {

@@ -26,19 +26,19 @@ import (
 	"golang.org/x/image/bmp"
 	"golang.org/x/sync/semaphore"
 
-	"github.com/ollama/ollama/api"
-	"github.com/ollama/ollama/envconfig"
-	"github.com/ollama/ollama/fs/ggml"
-	"github.com/ollama/ollama/llm"
-	"github.com/ollama/ollama/logutil"
-	"github.com/ollama/ollama/ml"
-	"github.com/ollama/ollama/ml/nn/pooling"
-	"github.com/ollama/ollama/model"
-	"github.com/ollama/ollama/model/input"
-	"github.com/ollama/ollama/runner/common"
-	"github.com/ollama/ollama/sample"
+	"github.com/glowllama/glowllama/api"
+	"github.com/glowllama/glowllama/envconfig"
+	"github.com/glowllama/glowllama/fs/ggml"
+	"github.com/glowllama/glowllama/llm"
+	"github.com/glowllama/glowllama/logutil"
+	"github.com/glowllama/glowllama/ml"
+	"github.com/glowllama/glowllama/ml/nn/pooling"
+	"github.com/glowllama/glowllama/model"
+	"github.com/glowllama/glowllama/model/input"
+	"github.com/glowllama/glowllama/runner/common"
+	"github.com/glowllama/glowllama/sample"
 
-	_ "github.com/ollama/ollama/model/models"
+	_ "github.com/glowllama/glowllama/model/models"
 )
 
 // response contains a piece of generated text along with optional logprobs

@@ -21,12 +21,12 @@ import (
 
 	"golang.org/x/sync/semaphore"
 
-	"github.com/ollama/ollama/api"
-	"github.com/ollama/ollama/envconfig"
-	"github.com/ollama/ollama/llama"
-	"github.com/ollama/ollama/llm"
-	"github.com/ollama/ollama/logutil"
-	"github.com/ollama/ollama/runner/common"
+	"github.com/glowllama/glowllama/api"
+	"github.com/glowllama/glowllama/envconfig"
+	"github.com/glowllama/glowllama/llama"
+	"github.com/glowllama/glowllama/llm"
+	"github.com/glowllama/glowllama/logutil"
+	"github.com/glowllama/glowllama/runner/common"
 )
 
 // response contains a piece of generated text along with optional logprobs

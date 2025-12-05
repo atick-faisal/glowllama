@@ -4,8 +4,8 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/ollama/ollama/api"
-	"github.com/ollama/ollama/harmony"
+	"github.com/glowllama/glowllama/api"
+	"github.com/glowllama/glowllama/harmony"
 )
 
 type Parser interface {

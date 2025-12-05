@@ -13,7 +13,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ollama/ollama/api"
+	"github.com/glowllama/glowllama/api"
 )
 
 type flagOptions struct {

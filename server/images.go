@@ -21,15 +21,15 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ollama/ollama/api"
-	"github.com/ollama/ollama/envconfig"
-	"github.com/ollama/ollama/fs/gguf"
-	"github.com/ollama/ollama/model/parsers"
-	"github.com/ollama/ollama/parser"
-	"github.com/ollama/ollama/template"
-	"github.com/ollama/ollama/thinking"
-	"github.com/ollama/ollama/types/model"
-	"github.com/ollama/ollama/version"
+	"github.com/glowllama/glowllama/api"
+	"github.com/glowllama/glowllama/envconfig"
+	"github.com/glowllama/glowllama/fs/gguf"
+	"github.com/glowllama/glowllama/model/parsers"
+	"github.com/glowllama/glowllama/parser"
+	"github.com/glowllama/glowllama/template"
+	"github.com/glowllama/glowllama/thinking"
+	"github.com/glowllama/glowllama/types/model"
+	"github.com/glowllama/glowllama/version"
 )
 
 var (

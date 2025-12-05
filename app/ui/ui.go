@@ -22,21 +22,21 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/ollama/ollama/api"
-	"github.com/ollama/ollama/app/auth"
-	"github.com/ollama/ollama/app/server"
-	"github.com/ollama/ollama/app/store"
-	"github.com/ollama/ollama/app/tools"
-	"github.com/ollama/ollama/app/types/not"
-	"github.com/ollama/ollama/app/ui/responses"
-	"github.com/ollama/ollama/app/version"
-	ollamaAuth "github.com/ollama/ollama/auth"
-	"github.com/ollama/ollama/envconfig"
-	"github.com/ollama/ollama/types/model"
+	"github.com/glowllama/glowllama/api"
+	"github.com/glowllama/glowllama/app/auth"
+	"github.com/glowllama/glowllama/app/server"
+	"github.com/glowllama/glowllama/app/store"
+	"github.com/glowllama/glowllama/app/tools"
+	"github.com/glowllama/glowllama/app/types/not"
+	"github.com/glowllama/glowllama/app/ui/responses"
+	"github.com/glowllama/glowllama/app/version"
+	ollamaAuth "github.com/glowllama/glowllama/auth"
+	"github.com/glowllama/glowllama/envconfig"
+	"github.com/glowllama/glowllama/types/model"
 	_ "github.com/tkrajina/typescriptify-golang-structs/typescriptify"
 )
 
-//go:generate tscriptify -package=github.com/ollama/ollama/app/ui/responses -target=./app/codegen/gotypes.gen.ts responses/types.go
+//go:generate tscriptify -package=github.com/glowllama/glowllama/app/ui/responses -target=./app/codegen/gotypes.gen.ts responses/types.go
 //go:generate npm --prefix ./app run build
 
 var CORS = envconfig.Bool("OLLAMA_CORS")

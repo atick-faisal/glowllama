@@ -9,10 +9,10 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/ollama/ollama/api"
-	"github.com/ollama/ollama/llm"
-	"github.com/ollama/ollama/model/renderers"
-	"github.com/ollama/ollama/template"
+	"github.com/glowllama/glowllama/api"
+	"github.com/glowllama/glowllama/llm"
+	"github.com/glowllama/glowllama/model/renderers"
+	"github.com/glowllama/glowllama/template"
 )
 
 type tokenizeFunc func(context.Context, string) ([]int, error)

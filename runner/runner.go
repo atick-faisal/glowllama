@@ -1,8 +1,8 @@
 package runner
 
 import (
-	"github.com/ollama/ollama/runner/llamarunner"
-	"github.com/ollama/ollama/runner/ollamarunner"
+	"github.com/glowllama/glowllama/runner/llamarunner"
+	"github.com/glowllama/glowllama/runner/ollamarunner"
 )
 
 func Execute(args []string) error {

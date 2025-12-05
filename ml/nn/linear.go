@@ -1,6 +1,6 @@
 package nn
 
-import "github.com/ollama/ollama/ml"
+import "github.com/glowllama/glowllama/ml"
 
 type Linear struct {
 	Weight ml.Tensor `gguf:"weight"`

@@ -8,10 +8,10 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/ollama/ollama/api"
-	"github.com/ollama/ollama/fs/ggml"
-	"github.com/ollama/ollama/llm"
-	"github.com/ollama/ollama/ml"
+	"github.com/glowllama/glowllama/api"
+	"github.com/glowllama/glowllama/fs/ggml"
+	"github.com/glowllama/glowllama/llm"
+	"github.com/glowllama/glowllama/ml"
 )
 
 func TestGenerateDebugRenderOnly(t *testing.T) {

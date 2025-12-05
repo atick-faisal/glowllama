@@ -13,7 +13,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ollama/ollama/app/store"
+	"github.com/glowllama/glowllama/app/store"
 )
 
 func TestHandlePostApiSettings(t *testing.T) {

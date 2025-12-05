@@ -14,7 +14,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ollama/ollama/app/store"
+	"github.com/glowllama/glowllama/app/store"
 )
 
 func TestIsNewReleaseAvailable(t *testing.T) {

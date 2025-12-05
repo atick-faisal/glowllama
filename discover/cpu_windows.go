@@ -6,7 +6,7 @@ import (
 	"syscall"
 	"unsafe"
 
-	"github.com/ollama/ollama/logutil"
+	"github.com/glowllama/glowllama/logutil"
 )
 
 type MEMORYSTATUSEX struct {

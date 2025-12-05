@@ -11,7 +11,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/ollama/ollama/fs/ggml"
+	"github.com/glowllama/glowllama/fs/ggml"
 )
 
 type ModelParameters struct {

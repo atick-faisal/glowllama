@@ -24,8 +24,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ollama/ollama/api"
-	"github.com/ollama/ollama/format"
+	"github.com/glowllama/glowllama/api"
+	"github.com/glowllama/glowllama/format"
 )
 
 var (

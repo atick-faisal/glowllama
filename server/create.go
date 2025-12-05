@@ -22,14 +22,14 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/ollama/ollama/api"
-	"github.com/ollama/ollama/convert"
-	"github.com/ollama/ollama/envconfig"
-	"github.com/ollama/ollama/format"
-	"github.com/ollama/ollama/fs/ggml"
-	"github.com/ollama/ollama/template"
-	"github.com/ollama/ollama/types/errtypes"
-	"github.com/ollama/ollama/types/model"
+	"github.com/glowllama/glowllama/api"
+	"github.com/glowllama/glowllama/convert"
+	"github.com/glowllama/glowllama/envconfig"
+	"github.com/glowllama/glowllama/format"
+	"github.com/glowllama/glowllama/fs/ggml"
+	"github.com/glowllama/glowllama/template"
+	"github.com/glowllama/glowllama/types/errtypes"
+	"github.com/glowllama/glowllama/types/model"
 )
 
 var (

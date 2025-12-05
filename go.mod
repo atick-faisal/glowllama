@@ -1,4 +1,4 @@
-module github.com/ollama/ollama
+module github.com/glowllama/glowllama
 
 go 1.24.1
 

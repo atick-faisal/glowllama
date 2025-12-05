@@ -19,7 +19,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/ollama/ollama/fs/ggml"
+	"github.com/glowllama/glowllama/fs/ggml"
 )
 
 type tensorData struct {

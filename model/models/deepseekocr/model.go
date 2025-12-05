@@ -4,12 +4,12 @@ import (
 	"math"
 	"slices"
 
-	"github.com/ollama/ollama/fs"
-	"github.com/ollama/ollama/kvcache"
-	"github.com/ollama/ollama/ml"
-	"github.com/ollama/ollama/ml/nn"
-	"github.com/ollama/ollama/model"
-	"github.com/ollama/ollama/model/input"
+	"github.com/glowllama/glowllama/fs"
+	"github.com/glowllama/glowllama/kvcache"
+	"github.com/glowllama/glowllama/ml"
+	"github.com/glowllama/glowllama/ml/nn"
+	"github.com/glowllama/glowllama/model"
+	"github.com/glowllama/glowllama/model/input"
 )
 
 type Model struct {

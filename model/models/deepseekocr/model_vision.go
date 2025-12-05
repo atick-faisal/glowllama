@@ -3,8 +3,8 @@ package deepseekocr
 import (
 	"math"
 
-	"github.com/ollama/ollama/ml"
-	"github.com/ollama/ollama/ml/nn"
+	"github.com/glowllama/glowllama/ml"
+	"github.com/glowllama/glowllama/ml/nn"
 )
 
 type visionModel struct {

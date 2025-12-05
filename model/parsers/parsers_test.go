@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ollama/ollama/api"
+	"github.com/glowllama/glowllama/api"
 )
 
 type mockParser struct {

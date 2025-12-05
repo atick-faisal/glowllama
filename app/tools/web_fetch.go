@@ -13,7 +13,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ollama/ollama/auth"
+	"github.com/glowllama/glowllama/auth"
 )
 
 type WebFetch struct{}

@@ -7,9 +7,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ollama/ollama/api"
-	"github.com/ollama/ollama/format"
-	"github.com/ollama/ollama/ml"
+	"github.com/glowllama/glowllama/api"
+	"github.com/glowllama/glowllama/format"
+	"github.com/glowllama/glowllama/ml"
 	"golang.org/x/sync/semaphore"
 )
 

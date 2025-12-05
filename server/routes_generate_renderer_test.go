@@ -11,10 +11,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/go-cmp/cmp"
 
-	"github.com/ollama/ollama/api"
-	"github.com/ollama/ollama/fs/ggml"
-	"github.com/ollama/ollama/llm"
-	"github.com/ollama/ollama/ml"
+	"github.com/glowllama/glowllama/api"
+	"github.com/glowllama/glowllama/fs/ggml"
+	"github.com/glowllama/glowllama/llm"
+	"github.com/glowllama/glowllama/ml"
 )
 
 // TestGenerateWithBuiltinRenderer tests that api/generate uses built-in renderers

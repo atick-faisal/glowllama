@@ -21,9 +21,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ollama/ollama/app/store"
-	"github.com/ollama/ollama/app/version"
-	"github.com/ollama/ollama/auth"
+	"github.com/glowllama/glowllama/app/store"
+	"github.com/glowllama/glowllama/app/version"
+	"github.com/glowllama/glowllama/auth"
 )
 
 var (
