@@ -1,22 +1,41 @@
-# Documentation
+# Glowllama Documentation
+
+Glowllama is a fork of Ollama with enhanced terminal rendering via Glamour.
 
 ### Getting Started
-* [Quickstart](https://docs.ollama.com/quickstart)
 * [Examples](./examples.md)
+* [Development guide](./development.md)
+
+### Differences from Ollama
+
+* **Beautiful Markdown Rendering**: All model output is rendered with Glamour
+* **Enhanced CLI**: Additional flags for controlling output rendering
+* **Same API**: Fully compatible with Ollama's API and model library
+
+### Ollama Documentation
+
+For general Ollama documentation (models, API, setup), refer to:
+* [Ollama Quickstart](https://docs.ollama.com/quickstart)
 * [Importing models](https://docs.ollama.com/import)
-* [MacOS Documentation](https://docs.ollama.com/macos)
-* [Linux Documentation](https://docs.ollama.com/linux)
-* [Windows Documentation](https://docs.ollama.com/windows)
-* [Docker Documentation](https://docs.ollama.com/docker)
-
-### Reference
-
 * [API Reference](https://docs.ollama.com/api)
 * [Modelfile Reference](https://docs.ollama.com/modelfile)
 * [OpenAI Compatibility](https://docs.ollama.com/api/openai-compatibility)
-
-### Resources
-
 * [Troubleshooting Guide](https://docs.ollama.com/troubleshooting)
-* [FAQ](https://docs.ollama.com/faq#faq)
-* [Development guide](./development.md)
+
+### Glowllama-Specific Features
+
+**Rendering Flags**
+```bash
+glowllama run llama3.3 --raw           # Disable rendering
+glowllama run llama3.3 --renderer=dark # Use dark theme
+glowllama run llama3.3 --no-style      # Disable colors
+```
+
+**Configuration**
+
+Create `~/.config/glowllama/config.yaml`:
+```yaml
+renderer: dark
+streaming_mode: buffered
+color: auto
+```
