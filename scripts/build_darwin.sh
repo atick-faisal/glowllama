@@ -13,7 +13,7 @@
 #
 VOL_NAME=${VOL_NAME:-"Ollama"}
 export VERSION=${VERSION:-$(git describe --tags --first-parent --abbrev=7 --long --dirty --always | sed -e "s/^v//g")}
-export GOFLAGS="'-ldflags=-w -s \"-X=github.com/ollama/ollama/version.Version=${VERSION#v}\" \"-X=github.com/ollama/ollama/server.mode=release\"'"
+export GOFLAGS="'-ldflags=-w -s \"-X=github.com/glowllama/glowllama/version.Version=${VERSION#v}\" \"-X=github.com/glowllama/glowllama/server.mode=release\"'"
 export CGO_CFLAGS="-mmacosx-version-min=14.0"
 export CGO_CXXFLAGS="-mmacosx-version-min=14.0"
 export CGO_LDFLAGS="-mmacosx-version-min=14.0"
@@ -60,25 +60,25 @@ _build_darwin() {
 _sign_darwin() {
     status "Creating universal binary..."
     mkdir -p dist/darwin
-    lipo -create -output dist/darwin/ollama dist/darwin-*/ollama
-    chmod +x dist/darwin/ollama
+    lipo -create -output dist/darwin/glowllama dist/darwin-*/glowllama
+    chmod +x dist/darwin/glowllama
 
     if [ -n "$APPLE_IDENTITY" ]; then
-        for F in dist/darwin/ollama dist/darwin-amd64/lib/ollama/*; do
-            codesign -f --timestamp -s "$APPLE_IDENTITY" --identifier ai.ollama.ollama --options=runtime $F
+        for F in dist/darwin/glowllama dist/darwin-amd64/lib/glowllama/*; do
+            codesign -f --timestamp -s "$APPLE_IDENTITY" --identifier ai.glowllama.glowllama --options=runtime $F
         done
 
         # create a temporary zip for notarization
         TEMP=$(mktemp -u).zip
-        ditto -c -k --keepParent dist/darwin/ollama "$TEMP"
+        ditto -c -k --keepParent dist/darwin/glowllama "$TEMP"
         xcrun notarytool submit "$TEMP" --wait --timeout 10m --apple-id $APPLE_ID --password $APPLE_PASSWORD --team-id $APPLE_TEAM_ID
         rm -f "$TEMP"
     fi
 
     status "Creating universal tarball..."
-    tar -cf dist/ollama-darwin.tar --strip-components 2 dist/darwin/ollama
-    tar -rf dist/ollama-darwin.tar --strip-components 4 dist/darwin-amd64/lib/
-    gzip -9vc <dist/ollama-darwin.tar >dist/ollama-darwin.tgz
+    tar -cf dist/glowllama-darwin.tar --strip-components 2 dist/darwin/glowllama
+    tar -rf dist/glowllama-darwin.tar --strip-components 4 dist/darwin-amd64/lib/
+    gzip -9vc <dist/glowllama-darwin.tar >dist/glowllama-darwin.tgz
 }
 
 _build_macapp() {
@@ -108,8 +108,8 @@ _build_macapp() {
     touch dist/Ollama.app
 
     go clean -cache
-    GOARCH=amd64 CGO_ENABLED=1 GOOS=darwin go build -o dist/darwin-app-amd64 -ldflags="-s -w -X=github.com/ollama/ollama/app/version.Version=${VERSION}" ./app/cmd/app
-    GOARCH=arm64 CGO_ENABLED=1 GOOS=darwin go build -o dist/darwin-app-arm64 -ldflags="-s -w -X=github.com/ollama/ollama/app/version.Version=${VERSION}" ./app/cmd/app
+    GOARCH=amd64 CGO_ENABLED=1 GOOS=darwin go build -o dist/darwin-app-amd64 -ldflags="-s -w -X=github.com/glowllama/glowllama/app/version.Version=${VERSION}" ./app/cmd/app
+    GOARCH=arm64 CGO_ENABLED=1 GOOS=darwin go build -o dist/darwin-app-arm64 -ldflags="-s -w -X=github.com/glowllama/glowllama/app/version.Version=${VERSION}" ./app/cmd/app
     mkdir -p dist/Ollama.app/Contents/MacOS
     lipo -create -output dist/Ollama.app/Contents/MacOS/Ollama dist/darwin-app-amd64 dist/darwin-app-arm64
     rm -f dist/darwin-app-amd64 dist/darwin-app-arm64
@@ -127,29 +127,29 @@ _build_macapp() {
     plutil -replace CFBundleShortVersionString -string "$VERSION" dist/Ollama.app/Contents/Info.plist
     plutil -replace CFBundleVersion -string "$VERSION" dist/Ollama.app/Contents/Info.plist
 
-    # Setup the ollama binaries
+    # Setup the glowllama binaries
     mkdir -p dist/Ollama.app/Contents/Resources
     if [ -d dist/darwin-amd64 ]; then
-        lipo -create -output dist/Ollama.app/Contents/Resources/ollama dist/darwin-amd64/ollama dist/darwin-arm64/ollama
-        cp dist/darwin-amd64/lib/ollama/*.so dist/darwin-amd64/lib/ollama/*.dylib dist/Ollama.app/Contents/Resources/
+        lipo -create -output dist/Ollama.app/Contents/Resources/glowllama dist/darwin-amd64/glowllama dist/darwin-arm64/glowllama
+        cp dist/darwin-amd64/lib/glowllama/*.so dist/darwin-amd64/lib/glowllama/*.dylib dist/Ollama.app/Contents/Resources/
     else
-        cp -a dist/darwin/ollama dist/Ollama.app/Contents/Resources/ollama
+        cp -a dist/darwin/glowllama dist/Ollama.app/Contents/Resources/glowllama
         cp dist/darwin/*.so dist/darwin/*.dylib dist/Ollama.app/Contents/Resources/
     fi
-    chmod a+x dist/Ollama.app/Contents/Resources/ollama
+    chmod a+x dist/Ollama.app/Contents/Resources/glowllama
 
     # Sign
     if [ -n "$APPLE_IDENTITY" ]; then
-        codesign -f --timestamp -s "$APPLE_IDENTITY" --identifier ai.ollama.ollama --options=runtime dist/Ollama.app/Contents/Resources/ollama
+        codesign -f --timestamp -s "$APPLE_IDENTITY" --identifier ai.glowllama.glowllama --options=runtime dist/Ollama.app/Contents/Resources/glowllama
         for lib in dist/Ollama.app/Contents/Resources/*.so dist/Ollama.app/Contents/Resources/*.dylib ; do
-            codesign -f --timestamp -s "$APPLE_IDENTITY" --identifier ai.ollama.ollama --options=runtime ${lib}
+            codesign -f --timestamp -s "$APPLE_IDENTITY" --identifier ai.glowllama.glowllama --options=runtime ${lib}
         done
-        codesign -f --timestamp -s "$APPLE_IDENTITY" --identifier com.electron.ollama --deep --options=runtime dist/Ollama.app
+        codesign -f --timestamp -s "$APPLE_IDENTITY" --identifier com.electron.glowllama --deep --options=runtime dist/Ollama.app
     fi
 
     rm -f dist/Ollama-darwin.zip
     ditto -c -k --keepParent dist/Ollama.app dist/Ollama-darwin.zip
-    (cd dist/Ollama.app/Contents/Resources/; tar -cf - ollama *.so *.dylib) | gzip -9vc > dist/ollama-darwin.tgz
+    (cd dist/Ollama.app/Contents/Resources/; tar -cf - glowllama *.so *.dylib) | gzip -9vc > dist/glowllama-darwin.tgz
 
     # Notarize and Staple
     if [ -n "$APPLE_IDENTITY" ]; then
@@ -176,7 +176,7 @@ _build_macapp() {
         ; )
         rm -f dist/rw*.dmg
 
-        codesign -f --timestamp -s "$APPLE_IDENTITY" --identifier ai.ollama.ollama --options=runtime dist/Ollama.dmg
+        codesign -f --timestamp -s "$APPLE_IDENTITY" --identifier ai.glowllama.glowllama --options=runtime dist/Ollama.dmg
         $(xcrun -f notarytool) submit dist/Ollama.dmg --wait --timeout 10m --apple-id "$APPLE_ID" --password "$APPLE_PASSWORD" --team-id "$APPLE_TEAM_ID"
         $(xcrun -f stapler) staple dist/Ollama.dmg
     else
